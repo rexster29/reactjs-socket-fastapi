@@ -7,7 +7,7 @@ export const themes = {
     background: "#ffffff",
     card: "#ffffff",
     text: "#06011c",
-    border: "#4173bf",
+    border: "#e0e0e0",
     accent: "#254991",
     secondary: "#4173bf"
   },
@@ -15,7 +15,7 @@ export const themes = {
     background: "#06011c",
     card: "#06011c",
     text: "#ffffff",
-    border: "#4173bf",
+    border: "#404040",
     accent: "#254991",
     secondary: "#4173bf"
   },
