@@ -69,5 +69,4 @@ The client will be available at `http://localhost:5173`
 - Modern React frontend with Vite build tool
 - Fast and efficient FastAPI backend
 - Real-time communication capabilities
-- Docker support for both frontend and backend
 - Development and production configurations
