@@ -1,52 +1,73 @@
-## Setup and Run locally
-FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
+# ReactJS Socket FastAPI Project
 
-### for server
+A modern web application built with ReactJS for the frontend and FastAPI for the backend, featuring real-time communication capabilities.
 
-Install the dependencies
+## Tech Stack
 
+### Backend
+- FastAPI (Python 3.7+)
+- Uvicorn ASGI Server
+- Gunicorn
+
+### Frontend
+- React 18
+- Vite
+- Framer Motion
+- Modern JavaScript (ES6+)
+
+## Setup and Run Locally
+
+### Backend Server Setup
+
+The backend is built with FastAPI, a modern, high-performance web framework for building APIs with Python 3.7+.
+
+1. Navigate to the server directory:
+```bash
+cd serverFastAPI
+```
+
+2. Install the dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the backend server
-
+3. Run the backend server:
 ```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### for client
+The server will be available at `http://localhost:8000`
 
-Install the dependencies
+### Frontend Client Setup
 
+The frontend is built with React and uses Vite as the build tool.
+
+1. Navigate to the client directory:
 ```bash
-npm i
+cd client
 ```
 
-Start the server
-
+2. Install the dependencies:
 ```bash
-npm start
+npm install
 ```
 
-### Build & run the docker image
-
-- for backend
-
+3. Start the development server:
 ```bash
-docker build -t server .
+npm run dev
 ```
 
-```bash
-docker run -d -p 8000:8000 server
-```
+The client will be available at `http://localhost:5173`
 
-- for client
+## Project Structure
 
-```bash
-docker build -t client .
-```
+- `/serverFastAPI` - Backend FastAPI server
+- `/client` - Frontend React application
 
-```bash
-docker run -d -p 3000:3000 client
-```
+## Features
+
+- Modern React frontend with Vite build tool
+- Fast and efficient FastAPI backend
+- Real-time communication capabilities
+- Docker support for both frontend and backend
+- Development and production configurations
