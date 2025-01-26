@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-light: #f5f7fa;
+  --bg-dark: #1a1c2e;
+  --primary: #254991;
+  --secondary: #4173bf;
+  --text-dark: #06011c;
+  --text-light: #ffffff;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  transition: background-color 0.2s;
+}
+
+.container {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: var(--primary);
+  color: var(--text-light);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+.content-grid {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.content-section {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.content-section:first-child {
+  border-right: 2px solid var(--secondary);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.content-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.content-item {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--secondary);
+  transition: all 0.2s;
+}
+
+.app.light .content-item {
+  background-color: #ffffff;
+  color: var(--text-dark);
+}
+
+.app.dark .content-item {
+  background-color: rgba(65, 115, 191, 0.1);
+  color: var(--text-light);
+}
+
+.app.light .section-title {
+  color: var(--primary);
+}
+
+.app.dark .section-title {
+  color: var(--text-light);
+}
+
+/* Theme Switcher */
+.theme-switcher {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.theme-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--text-light);
+  background: transparent;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.theme-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.theme-button.active {
+  background-color: var(--text-light);
+  color: var(--primary);
+}
+
+/* Loading Animation */
+.loading-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.loading-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--secondary);
+}
+
+/* Table Styles */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid var(--secondary);
+  background-color: #ffffff;
+}
+
+.dark .table-wrapper {
+  background-color: rgba(65, 115, 191, 0.1);
+}
+
+.table-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.table-wrapper th {
+  background-color: var(--primary);
+  color: var(--text-light);
+  font-weight: 500;
+  text-align: left;
+  padding: 1rem;
+  white-space: nowrap;
+}
+
+.light .table-wrapper td {
+  color: var(--text-dark);
+}
+
+.dark .table-wrapper td {
+  color: var(--text-light);
+}
+
+.table-wrapper tr:last-child td {
+  border-bottom: none;
+}
+
+.table-wrapper tbody tr {
+  transition: background-color 0.2s;
+}
+
+.table-wrapper tbody tr:hover {
+  background-color: rgba(65, 115, 191, 0.1);
+}
+
+.dark .table-wrapper tbody tr:hover {
+  background-color: rgba(65, 115, 191, 0.2);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .content-grid {
+    flex-direction: column;
+  }
+
+  .content-section:first-child {
+    border-right: none;
+    border-bottom: 2px solid var(--secondary);
+  }
+
+  .content-section {
+    flex: none;
+    height: 50vh;
+  }
+}
+
+/* Light theme */
+.app.light {
+  background-color: var(--bg-light);
+}
+
+/* Dark theme */
+.app.dark {
+  background-color: var(--bg-dark);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
