@@ -64,7 +64,7 @@ const App = () => {
       <div className="container">
         {/* Header */}
         <div className="header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
-          <h1 className="title" style={{ fontSize: "24px", fontWeight: "bold", color: currentTheme.text }}>Data Stream Viewer</h1>
+          <h1 className="title" style={{ color: currentTheme.text }}>LLM Stream</h1>
           <ThemeSwitcher />
         </div>
 
@@ -88,7 +88,7 @@ const App = () => {
         {/* Content Grid */}
         <div className="content-grid">
           {/* Text Section */}
-          <div className="content-section" style={{ padding: "20px", backgroundColor: currentTheme.card }}>
+          <div className="content-section">
             {/* <h2 className="section-title" style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px", color: currentTheme.text }}>Text Content</h2> */}
             <div className="content-items" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {textData.map((text, index) => (
@@ -105,7 +105,7 @@ const App = () => {
                   style={{ 
                     padding: "10px", 
                     borderRadius: "10px", 
-                    backgroundColor: currentTheme.background, 
+                    // backgroundColor: currentTheme.background, 
                     color: currentTheme.text,
                     position: "relative"
                   }}
