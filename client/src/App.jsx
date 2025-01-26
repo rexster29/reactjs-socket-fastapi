@@ -5,6 +5,31 @@ import ThemeSwitcher from "./components/ThemeSwitcher";
 import Table from "./components/Table";
 import "./App.css";
 
+// New AnimatedText component
+const AnimatedText = ({ text }) => {
+  const characters = Array.from(text);
+  
+  return (
+    <span style={{ display: "inline-block" }}>
+      {characters.map((char, index) => (
+        <motion.span
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 0.1,
+            delay: index * 0.03, // Delay each character
+            ease: "easeIn"
+          }}
+          style={{ display: "inline-block" }}
+        >
+          {char}
+        </motion.span>
+      ))}
+    </span>
+  );
+};
+
 const App = () => {
   const [textData, setTextData] = useState([]);
   const [tableData, setTableData] = useState([]);
@@ -38,7 +63,7 @@ const App = () => {
 
   return (
     <div className={`app ${theme}`} style={{ backgroundColor: currentTheme.background }}>
-      <div className="container" style={{ minHeight: "100vh", padding: "20px" }}>
+      <div className="container">
         {/* Header */}
         <div className="header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
           <h1 className="title" style={{ fontSize: "24px", fontWeight: "bold", color: currentTheme.text }}>Data Stream Viewer</h1>
@@ -63,28 +88,39 @@ const App = () => {
         )}
 
         {/* Content Grid */}
-        <div className="content-grid" style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+        <div className="content-grid">
           {/* Text Section */}
-          <div className="content-section" style={{ flexBasis: "50%", padding: "20px", borderRadius: "10px", border: `1px solid ${currentTheme.border}`, backgroundColor: currentTheme.card }}>
-            <h2 className="section-title" style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px", color: currentTheme.text }}>Text Content</h2>
+          <div className="content-section" style={{ padding: "20px", backgroundColor: currentTheme.card }}>
+            {/* <h2 className="section-title" style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px", color: currentTheme.text }}>Text Content</h2> */}
             <div className="content-items" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {textData.map((text, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="content-item"
-                  style={{ padding: "10px", borderRadius: "10px", backgroundColor: currentTheme.background, color: currentTheme.text }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.1 * index,
+                    ease: "easeOut"
+                  }}
+                  className="content-item streaming-text"
+                  style={{ 
+                    padding: "10px", 
+                    borderRadius: "10px", 
+                    backgroundColor: currentTheme.background, 
+                    color: currentTheme.text,
+                    position: "relative"
+                  }}
                 >
-                  {text}
+                  <AnimatedText text={text} />
                 </motion.div>
               ))}
             </div>
           </div>
 
           {/* Table Section */}
-          <div className="content-section" style={{ flexBasis: "50%", padding: "20px", borderRadius: "10px", border: `1px solid ${currentTheme.border}`, backgroundColor: currentTheme.card }}>
-            <h2 className="section-title" style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px", color: currentTheme.text }}>Table Content</h2>
+          <div className="content-section" style={{ padding: "20px", backgroundColor: currentTheme.card }}>
+            {/* <h2 className="section-title" style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "10px", color: currentTheme.text }}>Table Content</h2> */}
             <div className="content-items" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {tableData.map((table, index) => (
                 <Table key={index} htmlContent={table} />

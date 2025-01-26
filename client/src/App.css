@@ -16,20 +16,25 @@
 .app {
   min-height: 100vh;
   transition: background-color 0.2s;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .container {
-  height: 100vh;
+  /* min-height: 100vh; */
+  max-height: 100vh;
   margin: 0;
-  padding: 0;
+  max-width: 100vw;
+  padding: 10px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto; /* Allow vertical scroll if content exceeds */
+  box-sizing: border-box; /* Include padding in height calculation */
 }
 
 .header {
   background-color: var(--primary);
   color: var(--text-light);
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,21 +47,48 @@
   color: var(--text-light);
 }
 
-.content-grid {
-  flex: 1;
+/* Loading Animation */
+.loading-container {
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translate(-16%, -50%);
+  margin-bottom: 20px;
+}
+
+.loading-dots {
   display: flex;
-  overflow: hidden;
+  gap: 0.5rem;
+}
+
+.loading-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--secondary);
+}
+
+.content-grid {
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  flex-direction: row;
+  height: calc(100vh - 120px); /* Subtract header height + padding */
+  /* overflow: hidden; Hide overflow */
 }
 
 .content-section {
-  flex: 1;
-  padding: 1.5rem;
-  overflow-y: auto;
-  position: relative;
+  min-width: calc(50% - 10px);
+  max-width: calc(50% - 10px);
+  padding: 20px;
+  background-color: var(--card);
+  overflow-y: auto; /* Allow scrolling within sections */
+  border-radius: 10px; 
+  border: 1px solid #4173bf;
 }
 
 .content-section:first-child {
-  border-right: 2px solid var(--secondary);
+  /* border-right: 2px solid var(--secondary); */
 }
 
 .section-title {
@@ -74,9 +106,23 @@
 
 .content-item {
   padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--secondary);
-  transition: all 0.2s;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-item:last-child {
+  border-left: 2px solid var(--secondary);
+  padding-left: calc(1rem - 2px);
+}
+
+/* Optional: Add a subtle glow effect on the latest message */
+.content-item:last-child {
+  box-shadow: 0 0 10px rgba(65, 115, 191, 0.1);
+}
+
+.dark .content-item:last-child {
+  box-shadow: 0 0 10px rgba(65, 115, 191, 0.2);
 }
 
 .app.light .content-item {
@@ -122,33 +168,14 @@
   color: var(--primary);
 }
 
-/* Loading Animation */
-.loading-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.loading-dots {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.loading-dot {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-  background-color: var(--secondary);
-}
-
 /* Table Styles */
 .table-wrapper {
-  width: 100%;
   overflow-x: auto;
-  border-radius: 0.5rem;
-  border: 1px solid var(--secondary);
-  background-color: #ffffff;
+  -webkit-overflow-scrolling: touch; /* for smooth scrolling on iOS */
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .dark .table-wrapper {
@@ -171,11 +198,21 @@
   white-space: nowrap;
 }
 
+/* Responsive Table */
+.table-wrapper table th,
+.table-wrapper table td {
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Update these selectors to handle system/dark theme properly */
 .light .table-wrapper td {
   color: var(--text-dark);
 }
 
-.dark .table-wrapper td {
+.dark .table-wrapper td,
+.table-wrapper td {  /* Default style for system theme */
   color: var(--text-light);
 }
 
@@ -195,20 +232,17 @@
   background-color: rgba(65, 115, 191, 0.2);
 }
 
-/* Responsive styles */
+/* Update responsive styles */
 @media (max-width: 768px) {
   .content-grid {
+    height: calc(100vh - 100px);
     flex-direction: column;
   }
 
-  .content-section:first-child {
-    border-right: none;
-    border-bottom: 2px solid var(--secondary);
-  }
-
   .content-section {
-    flex: none;
-    height: 50vh;
+    min-width: 100%;
+    max-width: 100%;
+    height: 50%; /* Take half height on mobile */
   }
 }
 
@@ -239,4 +273,29 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
+}
+
+/* Text Responsiveness */
+body {
+  font-size: 16px;
+}
+
+@media (max-width: 1200px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 12px;
+  }
+}
+
+/* Streaming Text Effect */
+.streaming-text {
+  font-family: 'Courier New', monospace;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
 }

@@ -97,6 +97,6 @@ async def websocket_endpoint(websocket: WebSocket):
     for event in process_large_stream(testData):
         await websocket.send_json(event)
         print(event)
-        await asyncio.sleep(15)  # Simulate some delay for streaming
+        await asyncio.sleep(8)  # Simulate some delay for streaming
     
     await websocket.close()
